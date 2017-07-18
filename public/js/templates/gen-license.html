@@ -1,0 +1,50 @@
+<div class="modal-content">
+	<div class="modal-header">
+		<h4 class="modal-title" id="myModalLabel">Generate License</h4>
+	</div>
+	<div class="modal-body">
+		<form name="licgenform">
+			<div class="col s12 m12 l12">
+				<div class="form-group genLicense">
+					<div class="input-field col s6">
+						<input id="activation_code" type="text" name="activation_code" class="has-prefix" ng-class="{ 'invalid': !licgenform.activation_code.$pristine && licgenform.activation_code.$invalid }" ng-model="genData.activation_code" required>
+						<input id="prefix" class="the-prefix" type="number" name="prefix" ng-init="genData.prefix=000" ng-class="{ 'invalid': !licgenform.prefix.$pristine && licgenform.prefix.$invalid }" ng-model="genData.prefix" required>
+						<label for="activation_code">Activation Code</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="organization" type="text" name="organization" ng-class="{ 'invalid': !licgenform.organization.$pristine && licgenform.organization.$invalid }" ng-model="genData.organization" required>
+						<label for="organization">Organization</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-field col s5">
+						<input id="project" type="text" name="project" ng-class="{ 'invalid': !licgenform.project.$pristine && licgenform.project.$invalid }" ng-model="genData.project" required>
+						<label for="project">Project</label>
+					</div>
+					<div class="input-field col s5">
+						<input id="expiration_date" type="date" name="expiration_date" ng-class="{ 'invalid': !licgenform.expiration_date.$pristine && licgenform.expiration_date.$invalid }" ng-model="genData.expiration_date" required>
+						<label class="active" for="expiration_date">Project</label>
+					</div>
+					<div class="input-field col s2">
+						<input id="toGenerate" type="number" step="1" min="1" ng-init="genData.toGenerate=1" name="toGenerate" ng-class="{ 'invalid': !licgenform.toGenerate.$pristine && licgenform.toGenerate.$invalid }" ng-model="genData.toGenerate" required>
+						<label class="active" for="toGenerate">Licenses to generate</label>
+					</div>
+				</div>
+				<!-- <div class="form-group">
+					<div class="btn-group" data-toggle="buttons">
+						<label class="btn btn-default">
+							<input type="radio" name="options" value="0" ng-model="genData.status"> Inactive
+						</label>
+						<label class="btn btn-primary">
+							<input type="radio" name="options" value="1" ng-model="genData.status"> Active
+						</label>
+					</div>
+				</div> -->
+			</div>
+		</form>
+	</div>
+</div>
+<div class="modal-footer">
+	<a class="pull-left modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+	<a class="waves-effect waves-green btn-flat green white-text" ng-click="generate()" ng-disabled="licgenform.$invalid">Generate</a>
+</div>

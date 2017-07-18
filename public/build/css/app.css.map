@@ -1,0 +1,1 @@
+{"version":3,"sources":["app.scss"],"names":[],"mappings":"AAAA;;;;oBAIoB;AAIpB;EACC,+BAA+B,EAC/B","file":"app.css","sourcesContent":["/*\r\nlive compile:\r\n\tgulp watch\r\nfor production:\r\n\tgulp --production*/\r\n\r\n$primary: #fff;\r\n\r\n.jumbotronbox .card {\r\n\t/*background-color: $primary;*/\r\n}"]}

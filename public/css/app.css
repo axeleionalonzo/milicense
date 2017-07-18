@@ -1,0 +1,9 @@
+/*
+live compile:
+	gulp watch
+for production:
+	gulp --production*/
+.jumbotronbox .card {
+  /*background-color: $primary;*/ }
+
+/*# sourceMappingURL=app.css.map */

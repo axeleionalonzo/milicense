@@ -1,0 +1,153 @@
+<table class="responsive-table tablebox fixedheader highlight">
+	<thead>
+		<tr class="sortable">
+			<!-- <th data-field="id" class="grey lighten-3">#</th> -->
+			<th data-field="index">#</th>
+			<th data-field="activation_code" class="">
+				<a href="" ng-click="sortType = 'activation_code'; sortReverse = !sortReverse">Activation code 
+					<i ng-show="sortType == 'activation_code' && !sortReverse" class="material-icons">arrow_drop_down</i>
+					<i ng-show="sortType == 'activation_code' && sortReverse" class="material-icons">arrow_drop_up</i>
+				</a>
+			</th>
+			<th data-field="app_version" class="">
+				<a href="" ng-click="sortType = 'app_version'; sortReverse = !sortReverse">App version 
+					<i ng-show="sortType == 'app_version' && !sortReverse" class="material-icons">arrow_drop_down</i>
+					<i ng-show="sortType == 'app_version' && sortReverse" class="material-icons">arrow_drop_up</i>
+				</a>
+			</th>
+			<th data-field="organization" class="">
+				<a href="" ng-click="sortType = 'organization'; sortReverse = !sortReverse">Organization 
+					<i ng-show="sortType == 'organization' && !sortReverse" class="material-icons">arrow_drop_down</i>
+					<i ng-show="sortType == 'organization' && sortReverse" class="material-icons">arrow_drop_up</i>
+				</a>
+			</th>
+			<th data-field="device_model" class="">
+				<a href="" ng-click="sortType = 'device_model'; sortReverse = !sortReverse">Model 
+					<i ng-show="sortType == 'device_model' && !sortReverse" class="material-icons">arrow_drop_down</i>
+					<i ng-show="sortType == 'device_model' && sortReverse" class="material-icons">arrow_drop_up</i>
+				</a>
+			</th>
+			<th data-field="device_manufacturer" class="">
+				<a href="" ng-click="sortType = 'device_manufacturer'; sortReverse = !sortReverse">Manufacturer 
+					<i ng-show="sortType == 'device_manufacturer' && !sortReverse" class="material-icons">arrow_drop_down</i>
+					<i ng-show="sortType == 'device_manufacturer' && sortReverse" class="material-icons">arrow_drop_up</i>
+				</a>
+			</th>
+			<th data-field="status" class="">
+				<a href="" ng-click="sortType = 'status'; sortReverse = !sortReverse">Status 
+					<i ng-show="sortType == 'status' && !sortReverse" class="material-icons">arrow_drop_down</i>
+					<i ng-show="sortType == 'status' && sortReverse" class="material-icons">arrow_drop_up</i>
+				</a>
+			</th>
+			<th data-field="device_code" class="">
+				<a href="" ng-click="sortType = 'device_code'; sortReverse = !sortReverse">IMEI 
+					<i ng-show="sortType == 'device_code' && !sortReverse" class="material-icons">arrow_drop_down</i>
+					<i ng-show="sortType == 'device_code' && sortReverse" class="material-icons">arrow_drop_up</i>
+				</a>
+			</th>
+			<th data-field="project" class="">
+				<a href="" ng-click="sortType = 'project'; sortReverse = !sortReverse">Project 
+					<i ng-show="sortType == 'project' && !sortReverse" class="material-icons">arrow_drop_down</i>
+					<i ng-show="sortType == 'project' && sortReverse" class="material-icons">arrow_drop_up</i>
+				</a>
+			</th>
+			<th data-field="activation_date" class="">
+				<a href="" ng-click="sortType = 'activation_date'; sortReverse = !sortReverse">Activated 
+					<i ng-show="sortType == 'activation_date' && !sortReverse" class="material-icons">arrow_drop_down</i>
+					<i ng-show="sortType == 'activation_date' && sortReverse" class="material-icons">arrow_drop_up</i>
+				</a>
+			</th>
+			<th data-field="expiration_date" class="">
+				<a href="" ng-click="sortType = 'expiration_date'; sortReverse = !sortReverse">Expiration 
+					<i ng-show="sortType == 'expiration_date' && !sortReverse" class="material-icons">arrow_drop_down</i>
+					<i ng-show="sortType == 'expiration_date' && sortReverse" class="material-icons">arrow_drop_up</i>
+				</a>
+			</th>
+			<th data-field="buttons" class="buttons centered"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr id="[[ license.id ]]" ng-repeat='license in licenses | orderBy:sortType:sortReverse | filter:searchLicense as filteredLicense' class="editable" ng-class="{'transparent' : license.status, 'yellow lighten-3' : license.editing }" ng-dblclick="getLicense(license)" >
+		<!-- iterates the licenses -->
+			<td class="grey lighten-3 index">[[ $index+1 ]]</td>
+			<td><input ng-enter="updateLicense(license)" type="text" ng-model="license.activation_code" ng-readonly="!license.editing"></td>
+			<td><input ng-enter="updateLicense(license)" type="text" ng-model="license.app_version" ng-readonly="!license.editing"></td>
+			<td><input ng-enter="updateLicense(license)" type="text" ng-model="license.organization" ng-readonly="!license.editing"></td>
+			<td><input ng-enter="updateLicense(license)" type="text" ng-model="license.device_model" ng-readonly="!license.editing"></td>
+			<td><input ng-enter="updateLicense(license)" type="text" ng-model="license.device_manufacturer" ng-readonly="e.editing"></td>
+			<td><input ng-enter="updateLicense(license)" type="number" step="1" min="0" max="1" ng-model="license.status" ng-readonly="e.editing"></td>
+			<td><input ng-enter="updateLicense(license)" type="text" ng-model="license.device_code" ng-readonly="!license.editing"></td>
+			<td><input ng-enter="updateLicense(license)" type="text" ng-model="license.project" ng-readonly="!license.editing"></td>
+			<td><input ng-enter="updateLicense(license)" type="text" ng-model="license.activation_date" ng-readonly="!license.editing"></td>
+			<td><input ng-enter="updateLicense(license)" type="text" ng-model="license.expiration_date" ng-readonly="!license.editing"></td>
+			<td class="buttons center">
+				<!-- delete button -->
+				<i class="material-icons" ng-click="toDelete(license)" ng-show="!license.editing && !license.status && !license.loading && !license.confirmDelete">delete</i>
+				<i class="material-icons danger" ng-click="deleteLicense(deleteindex)" ng-show="license.confirmDelete">delete_forever</i>
+				<!-- update button -->
+				<i class="material-icons update" ng-click="updateLicense(license)" ng-show="license.editing && !license.loading">done</i>
+
+				<div class="loading" ng-show="license.loading">
+					<div class="loading-bar"></div>
+					<div class="loading-bar"></div>
+					<div class="loading-bar"></div>
+					<div class="loading-bar"></div>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<!-- URGENT/HOTFIX: data export i dont think this is the right way to do it, but damn it works -->
+<div id="exportData" style="display: none">
+	<table>
+		<thead>
+			<tr>
+				<!-- <th ass="grey lighten-3">#</th> -->
+				<th>
+					<a>Activation code</a>
+				</th>
+				<th>
+					<a>App version</a>
+				</th>
+				<th>
+					<a>Organization</a>
+				</th>
+				<th>
+					<a>Model</a>
+				</th>
+				<th>
+					<a>Manufacturer</a>
+				</th>
+				<th>
+					<a>Status</a>
+				</th>
+				<th>
+					<a>IMEI</a>
+				</th>
+				<th>
+					<a>Project</a>
+				</th>
+				<th>
+					<a>Activated</a>
+				</th>
+				<th>
+					<a>Expiration</a>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr id="[[ license.id ]]" ng-repeat='license in licenses | orderBy:sortType:sortReverse | filter:searchLicense'>
+				<td>[[ license.activation_code ]]</td>
+				<td>[[ license.app_version ]]</td>
+				<td>[[ license.organization ]]</td>
+				<td>[[ license.device_model ]]</td>
+				<td>[[ license.device_manufacturer ]]</td>
+				<td>[[ license.status ]]</td>
+				<td>[[ license.device_code ]]</td>
+				<td>[[ license.project ]]</td>
+				<td>[[ license.activation_date ]]</td>
+				<td>[[ license.expiration_date ]]</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

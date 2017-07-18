@@ -1,0 +1,37 @@
+<form name="addlicform">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h4 class="modal-title" id="myModalLabel">Add License</h4>
+		</div>
+		<div class="modal-body">
+				<div class="col s12 m12 l12">
+					<div class="form-group addLicense">
+						<div class="input-field col s6">
+							<input id="activation_code" type="text" name="activation_code" ng-class="{ 'invalid': !addlicform.activation_code.$pristine && addlicform.activation_code.$invalid }" ng-model="newLic.activation_code" required>
+							<label for="activation_code">Activation Code</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="organization" type="text" name="organization" ng-class="{ 'invalid': !addlicform.organization.$pristine && addlicform.organization.$invalid }" ng-model="newLic.organization" required>
+							<label for="organization">Organization</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="project" type="text" name="project" ng-class="{ 'invalid': !addlicform.project.$pristine && addlicform.project.$invalid }" ng-model="newLic.project" required>
+							<label for="project">Project</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="expiration_date" type="date" name="expiration_date" ng-class="{ 'invalid': !addlicform.expiration_date.$pristine && addlicform.expiration_date.$invalid }" ng-model="newLic.expiration_date" required>
+							<label class="active" for="expiration_date">Expiration</label>
+						</div>
+						<div class="input-field col s12" hidden>
+							<input id="activation_date" type="text" name="activation_date" ng-model="newLic.activation_date" ng-value="activation_date | date: 'yyyy-MM-dd HH:mm:ss a' " readonly>
+							<label class="active" for="activation_date">Activation Date</label>
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a class="pull-left modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+		<a class="waves-effect waves-green btn-flat green white-text" ng-click="addLicense()" ng-disabled="addlicform.$invalid">Add</a>
+	</div>
+</form>
