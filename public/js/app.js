@@ -18,24 +18,24 @@ var app = angular.module('licenseApp', ['chieffancypants.loadingBar', 'firebase'
 });
 
 // let's create a re-usable factory that generates the $firebaseAuth instance
-app.factory("Auth", ["$firebaseAuth", function($firebaseAuth) {
+app.factory("FireAuth", ["$firebaseAuth", function($firebaseAuth) {
   var ref = firebase.auth();
   return $firebaseAuth(ref);
 }]);
 
 app.config(function(cfpLoadingBarProvider) {
-	cfpLoadingBarProvider.includeSpinner = false; // toggle spinner
 	cfpLoadingBarProvider.includeBar = true; // toggle loading bar
 });
 
-app.controller('mainController', function($scope, $interval, $http, $filter, $timeout, $firebaseObject, $firebaseArray) {
+app.controller('mainController', ["$scope", "$interval", "$http", "$filter", "$timeout", "$firebaseObject", "$firebaseArray", "FireAuth", function($scope, $interval, $http, $filter, $timeout, $firebaseObject, $firebaseArray, FireAuth) {
 
+	// var mainCtrl = this;
 	$scope.sidebarID = "";
 
-	// get auth methods from database
-	var auth = firebase.auth();
+	// // get auth methods from database
+	// var auth = firebase.auth();
 
-	auth.onAuthStateChanged(function(user) {
+	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			$scope.session = user; // user is logged in
 			$scope.email = user.email;
@@ -49,8 +49,8 @@ app.controller('mainController', function($scope, $interval, $http, $filter, $ti
 	});
 
 	$scope.greet = "Hello!";
-	$scope.welcome = ["Hola!","Indo!","Bonjour!","Ciao!","Ola!","Namaste!","Salaam!","Konnichiwa!","Merhaba!","Jambo!","Ni Hau!","Hallo!","Hello!","Kamusta!"];
-	$scope.greet = $scope.welcome[Math.floor(Math.random() * $scope.welcome.length)];
+	var welcome = ["Hola!","Indo!","Bonjour!","Ciao!","Ola!","Namaste!","Salaam!","Konnichiwa!","Merhaba!","Jambo!","Ni Hau!","Hallo!","Hello!","Kamusta!"];
+	$scope.greet = welcome[Math.floor(Math.random() * welcome.length)];
 	$scope.errorCode = false;
 
 	// getting the elements
@@ -69,7 +69,7 @@ app.controller('mainController', function($scope, $interval, $http, $filter, $ti
 		var token = txtToken.val();
 
 		// sign in
-		auth.signInWithEmailAndPassword(email, pass).then(function() {
+		FireAuth.signInWithEmailAndPassword(email, pass).then(function() {
 				// Sign-in successful.
 				// Send token to your backend via HTTPS
 				cardAction.fadeOut(1000);
@@ -135,7 +135,7 @@ app.controller('mainController', function($scope, $interval, $http, $filter, $ti
 		});
 
 		$("a#logout").click(function(e) {
-			auth.signOut();
+			FireAuth.signOut();
 		});
 
 		$("#exportlicense").click(function (e) {
@@ -309,7 +309,7 @@ app.controller('mainController', function($scope, $interval, $http, $filter, $ti
 		}
 	};
 	$scope.handlers();
-});
+}]);
 
 // nothing fancy custom directives // =====================================================/
 // retrieves the licenses view from licenses.html
